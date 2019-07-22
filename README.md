@@ -9,6 +9,7 @@ This library is used for encrypting OpenCerts files in transit
 
 #### Table of Contents
 
+
 -   [ENCRYPTION_PARAMETERS](#encryption_parameters)
     -   [algorithm](#algorithm)
     -   [keyLength](#keylength)
