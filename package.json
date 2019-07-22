@@ -1,14 +1,14 @@
 {
-  "name": "@rjchow/nod",
+  "name": "@govtechsg/opencerts-encryption",
   "version": "0.0.0-development",
-  "description": "My node module",
+  "description": "Shared library for managing opencerts encrypted file transfers",
   "license": "MIT",
-  "repository": "rjchow/nod",
+  "repository": "opencerts/opencerts-encryption",
   "main": "dist/index.js",
   "author": {
-    "name": "Diego Haz",
-    "email": "hazdiego@gmail.com",
-    "url": "https://github.com/diegohaz"
+    "name": "RJ Chow",
+    "email": "me@rjchow.com",
+    "url": "https://github.com/rjchow"
   },
   "files": [
     "dist",
@@ -21,7 +21,7 @@
     "postcoverage": "open-cli coverage/lcov-report/index.html",
     "lint": "eslint . --ext js,ts,tsx",
     "lint:fix": "npm run lint -- --fix",
-    "docs": "documentation readme src --section=API",
+    "docs": "documentation readme src/index.ts --section=API --document-exported --babel=./.babelrc --parse-extension=ts",
     "postdocs": "git add README.md",
     "clean": "rimraf dist",
     "prebuild": "npm run docs && npm run clean",
@@ -42,10 +42,11 @@
     ]
   },
   "keywords": [
-    "generator-nod"
+    "opencerts"
   ],
   "dependencies": {
-    "debug": "4.1.1"
+    "debug": "4.1.1",
+    "node-forge": "0.8.5"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",
@@ -54,6 +55,7 @@
     "@babel/preset-env": "7.4.5",
     "@babel/preset-typescript": "7.3.3",
     "@types/debug": "4.1.4",
+    "@types/node-forge": "0.8.4",
     "@types/jest": "24.0.13",
     "@typescript-eslint/eslint-plugin": "1.11.0",
     "@typescript-eslint/parser": "1.11.0",
@@ -71,7 +73,7 @@
     "open-cli": "5.0.0",
     "prettier": "1.18.2",
     "rimraf": "2.6.3",
-    "semantic-release": "15.13.18",
+    "semantic-release": "^15.13.18",
     "typescript": "3.5.1"
   },
   "publishConfig": {
