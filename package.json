@@ -1,0 +1,80 @@
+{
+  "name": "@rjchow/nod",
+  "version": "0.0.0-development",
+  "description": "My node module",
+  "license": "MIT",
+  "repository": "rjchow/nod",
+  "main": "dist/index.js",
+  "author": {
+    "name": "Diego Haz",
+    "email": "hazdiego@gmail.com",
+    "url": "https://github.com/diegohaz"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "coverage": "npm test -- --coverage",
+    "postcoverage": "open-cli coverage/lcov-report/index.html",
+    "lint": "eslint . --ext js,ts,tsx",
+    "lint:fix": "npm run lint -- --fix",
+    "docs": "documentation readme src --section=API",
+    "postdocs": "git add README.md",
+    "clean": "rimraf dist",
+    "prebuild": "npm run docs && npm run clean",
+    "build": "tsc --emitDeclarationOnly && babel src -d dist --ignore src/**/*.spec.js,src/**/*.test.js -x .js,.ts,.tsx",
+    "preversion": "npm run lint && npm test && npm run build",
+    "semantic-release": "semantic-release"
+  },
+  "types": "dist/ts/src",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix --ext js,ts,tsx",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "generator-nod"
+  ],
+  "dependencies": {
+    "debug": "4.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/plugin-proposal-class-properties": "7.4.4",
+    "@babel/preset-env": "7.4.5",
+    "@babel/preset-typescript": "7.3.3",
+    "@types/debug": "4.1.4",
+    "@types/jest": "24.0.13",
+    "@typescript-eslint/eslint-plugin": "1.11.0",
+    "@typescript-eslint/parser": "1.11.0",
+    "babel-eslint": "10.0.2",
+    "babel-jest": "24.8.0",
+    "documentation": "11.0.1",
+    "eslint": "6.0.0",
+    "eslint-config-airbnb-base": "13.2.0",
+    "eslint-config-prettier": "5.0.0",
+    "eslint-plugin-import": "2.17.3",
+    "eslint-plugin-prettier": "3.1.0",
+    "husky": "2.4.1",
+    "jest": "24.8.0",
+    "lint-staged": "8.2.1",
+    "open-cli": "5.0.0",
+    "prettier": "1.18.2",
+    "rimraf": "2.6.3",
+    "semantic-release": "15.13.18",
+    "typescript": "3.5.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
