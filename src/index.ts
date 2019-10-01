@@ -15,7 +15,7 @@ export const ENCRYPTION_PARAMETERS = {
  * Generates a random key represented as a hexadecimal string
  * @param {number} keyLengthInBits Key length
  */
-const generateEncryptionKey = (keyLengthInBits = ENCRYPTION_PARAMETERS.keyLength) => {
+export const generateEncryptionKey = (keyLengthInBits = ENCRYPTION_PARAMETERS.keyLength) => {
   const encryptionKey = forge.random.getBytesSync(keyLengthInBits / 8);
   return forge.util.bytesToHex(encryptionKey);
 };
@@ -33,17 +33,17 @@ const generateIv = (ivLengthInBits = ENCRYPTION_PARAMETERS.ivLength) => {
  * Generates the requisite randomised variables and initialises the cipher with them
  * @returns the cipher object, encryption key in hex, and iv in base64
  */
-const makeCipher = () => {
-  const encryptionKey = generateEncryptionKey();
+const makeCipher = (encryptionKey: string) => {
+  const key = encryptionKey || generateEncryptionKey();
   const iv = generateIv();
-  const cipher = forge.cipher.createCipher(ENCRYPTION_PARAMETERS.algorithm, forge.util.hexToBytes(encryptionKey));
+  const cipher = forge.cipher.createCipher(ENCRYPTION_PARAMETERS.algorithm, forge.util.hexToBytes(key));
 
   cipher.start({
     iv: forge.util.decode64(iv),
     tagLength: ENCRYPTION_PARAMETERS.tagLength
   });
 
-  return { cipher, encryptionKey, iv };
+  return { cipher, key, iv };
 };
 
 const preProcessDocument = (document: string) =>
@@ -67,12 +67,12 @@ export interface IEncryptionResults {
  * @returns key encryption key in hexadecimal
  * @returns type The encryption algorithm identifier
  */
-export const encryptString = (document: string): IEncryptionResults => {
+export const encryptString = (document: string, encryptionKey: string = ""): IEncryptionResults => {
   if (typeof document !== "string") {
     throw new Error("encryptString only accepts strings");
   }
 
-  const { cipher, encryptionKey, iv } = makeCipher();
+  const { cipher, key, iv } = makeCipher(encryptionKey);
 
   cipher.update(preProcessDocument(document));
   cipher.finish();
@@ -83,7 +83,7 @@ export const encryptString = (document: string): IEncryptionResults => {
     cipherText: encryptedMessage,
     iv,
     tag,
-    key: encryptionKey,
+    key,
     type: ENCRYPTION_PARAMETERS.version
   };
 };
