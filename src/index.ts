@@ -33,17 +33,16 @@ const generateIv = (ivLengthInBits = ENCRYPTION_PARAMETERS.ivLength) => {
  * Generates the requisite randomised variables and initialises the cipher with them
  * @returns the cipher object, encryption key in hex, and iv in base64
  */
-const makeCipher = (encryptionKey: string) => {
-  const key = encryptionKey || generateEncryptionKey();
+const makeCipher = (encryptionKey: string = generateEncryptionKey()) => {
   const iv = generateIv();
-  const cipher = forge.cipher.createCipher(ENCRYPTION_PARAMETERS.algorithm, forge.util.hexToBytes(key));
+  const cipher = forge.cipher.createCipher(ENCRYPTION_PARAMETERS.algorithm, forge.util.hexToBytes(encryptionKey));
 
   cipher.start({
     iv: forge.util.decode64(iv),
     tagLength: ENCRYPTION_PARAMETERS.tagLength
   });
 
-  return { cipher, key, iv };
+  return { cipher, encryptionKey, iv };
 };
 
 const preProcessDocument = (document: string) =>
@@ -67,12 +66,12 @@ export interface IEncryptionResults {
  * @returns key encryption key in hexadecimal
  * @returns type The encryption algorithm identifier
  */
-export const encryptString = (document: string, encryptionKey: string = ""): IEncryptionResults => {
+export const encryptString = (document: string, key?: string): IEncryptionResults => {
   if (typeof document !== "string") {
     throw new Error("encryptString only accepts strings");
   }
 
-  const { cipher, key, iv } = makeCipher(encryptionKey);
+  const { cipher, encryptionKey, iv } = makeCipher(key);
 
   cipher.update(preProcessDocument(document));
   cipher.finish();
@@ -83,7 +82,7 @@ export const encryptString = (document: string, encryptionKey: string = ""): IEn
     cipherText: encryptedMessage,
     iv,
     tag,
-    key,
+    key: encryptionKey,
     type: ENCRYPTION_PARAMETERS.version
   };
 };
