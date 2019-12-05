@@ -1,9 +1,9 @@
 {
-  "name": "@govtechsg/opencerts-encryption",
+  "name": "@govtechsg/oa-encryption",
   "version": "0.0.0-development",
-  "description": "Shared library for managing opencerts encrypted file transfers",
+  "description": "Shared library for managing oa encrypted file transfers",
   "license": "MIT",
-  "repository": "opencerts/opencerts-encryption",
+  "repository": "Open-Attestation/oa-encryption",
   "main": "dist/index.js",
   "author": {
     "name": "RJ Chow",
@@ -29,7 +29,7 @@
     "preversion": "npm run lint && npm test && npm run build",
     "semantic-release": "semantic-release"
   },
-  "types": "dist/ts/src",
+  "types": "dist/ts",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -42,7 +42,9 @@
     ]
   },
   "keywords": [
-    "opencerts"
+    "open-attestation",
+    "opencerts",
+    "encryption"
   ],
   "dependencies": {
     "debug": "4.1.1",
@@ -55,8 +57,8 @@
     "@babel/preset-env": "7.4.5",
     "@babel/preset-typescript": "7.3.3",
     "@types/debug": "4.1.4",
-    "@types/node-forge": "0.8.4",
     "@types/jest": "24.0.13",
+    "@types/node-forge": "0.8.4",
     "@typescript-eslint/eslint-plugin": "1.11.0",
     "@typescript-eslint/parser": "1.11.0",
     "babel-eslint": "10.0.2",
@@ -73,7 +75,7 @@
     "open-cli": "5.0.0",
     "prettier": "1.18.2",
     "rimraf": "2.6.3",
-    "semantic-release": "^15.13.18",
+    "semantic-release": "15.13.31",
     "typescript": "3.5.1"
   },
   "publishConfig": {
