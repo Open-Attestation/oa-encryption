@@ -4,6 +4,13 @@ const base64Regex = /^(?:[a-zA-Z0-9+/]{4})*(?:|(?:[a-zA-Z0-9+/]{3}=)|(?:[a-zA-Z0
 const encryptionKeyRegex = new RegExp(`^[0-9a-f]{${ENCRYPTION_PARAMETERS.keyLength / 4}}$`);
 
 describe("storage/crypto", () => {
+  it("should encrypt and decrypt unicode symbols correctly", () => {
+    const originalObject = JSON.stringify({ data: "Rating(≤ 25kg)" });
+    const enc = encryptString(originalObject);
+    const dec = decryptString(enc);
+    expect(dec).toEqual(originalObject);
+  });
+
   describe("encryptString", () => {
     let encryptionResults: any | IEncryptionResults;
 
