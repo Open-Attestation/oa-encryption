@@ -45,9 +45,17 @@ const makeCipher = (encryptionKey: string = generateEncryptionKey()) => {
   return { cipher, encryptionKey, iv };
 };
 
-const preProcessDocument = (document: string) =>
-  // TODO: put compression in here?
-  forge.util.createBuffer(document);
+export const encodeDocument = (document: string) => {
+  const bytes = forge.util.encodeUtf8(document);
+  const encoded = forge.util.encode64(bytes);
+  return encoded;
+};
+
+export const decodeDocument = (encoded: string) => {
+  const decoded = forge.util.decode64(encoded);
+  const document = forge.util.decodeUtf8(decoded);
+  return document;
+};
 
 export interface IEncryptionResults {
   cipherText: string;
@@ -72,8 +80,8 @@ export const encryptString = (document: string, key?: string): IEncryptionResult
   }
 
   const { cipher, encryptionKey, iv } = makeCipher(key);
-
-  cipher.update(preProcessDocument(document));
+  const buffer = forge.util.createBuffer(encodeDocument(document));
+  cipher.update(buffer);
   cipher.finish();
 
   const encryptedMessage = forge.util.encode64(cipher.output.data);
@@ -115,5 +123,5 @@ export const decryptString = ({ cipherText, tag, iv, key, type }: IEncryptionRes
   if (!success) {
     throw new Error("Error decrypting message");
   }
-  return decipher.output.data;
+  return decodeDocument(decipher.output.data);
 };
