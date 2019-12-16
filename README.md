@@ -16,11 +16,15 @@ This library is used for encrypting OpenCerts files in transit
     -   [version](#version)
 -   [generateEncryptionKey](#generateencryptionkey)
     -   [Parameters](#parameters)
+-   [encodeDocument](#encodedocument)
+    -   [Parameters](#parameters-1)
+-   [decodeDocument](#decodedocument)
+    -   [Parameters](#parameters-2)
 -   [IEncryptionResults](#iencryptionresults)
 -   [encryptString](#encryptstring)
-    -   [Parameters](#parameters-1)
+    -   [Parameters](#parameters-3)
 -   [decryptString](#decryptstring)
-    -   [Parameters](#parameters-2)
+    -   [Parameters](#parameters-4)
 
 ### ENCRYPTION_PARAMETERS
 
@@ -44,6 +48,18 @@ Generates a random key represented as a hexadecimal string
 #### Parameters
 
 -   `keyLengthInBits` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Key length (optional, default `ENCRYPTION_PARAMETERS.keyLength`)
+
+### encodeDocument
+
+#### Parameters
+
+-   `document` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### decodeDocument
+
+#### Parameters
+
+-   `encoded` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### IEncryptionResults
 
