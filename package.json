@@ -47,7 +47,7 @@
     "encryption"
   ],
   "dependencies": {
-    "debug": "4.1.1",
+    "debug": "4.2.0",
     "node-forge": "0.8.5"
   },
   "devDependencies": {
