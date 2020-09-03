@@ -48,7 +48,7 @@
   ],
   "dependencies": {
     "debug": "4.1.1",
-    "node-forge": "0.8.5"
+    "node-forge": "0.10.0"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",
