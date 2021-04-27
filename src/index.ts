@@ -1,10 +1,11 @@
-const forge = require("node-forge");
+import forge from "node-forge";
+
 /**
  * Default options from responses here
  * https://crypto.stackexchange.com/questions/26783/ciphertext-and-tag-size-and-iv-transmission-with-aes-in-gcm-mode/26787
  */
 export const ENCRYPTION_PARAMETERS = {
-  algorithm: "AES-GCM",
+  algorithm: "AES-GCM" as const,
   keyLength: 256, // Key length in bits
   ivLength: 96, // IV length in bits: NIST suggests 12 bytes
   tagLength: 128, // GCM authentication tag length in bits, see link above for explanation
@@ -47,14 +48,12 @@ const makeCipher = (encryptionKey: string = generateEncryptionKey()) => {
 
 export const encodeDocument = (document: string) => {
   const bytes = forge.util.encodeUtf8(document);
-  const encoded = forge.util.encode64(bytes);
-  return encoded;
+  return forge.util.encode64(bytes);
 };
 
 export const decodeDocument = (encoded: string) => {
   const decoded = forge.util.decode64(encoded);
-  const document = forge.util.decodeUtf8(decoded);
-  return document;
+  return forge.util.decodeUtf8(decoded);
 };
 
 export interface IEncryptionResults {
@@ -116,7 +115,7 @@ export const decryptString = ({ cipherText, tag, iv, key, type }: IEncryptionRes
   decipher.start({
     iv: ivBytestring,
     tagLength: ENCRYPTION_PARAMETERS.tagLength,
-    tag: tagBytestring
+    tag: forge.util.createBuffer(tagBytestring, "raw")
   });
   decipher.update(forge.util.createBuffer(cipherTextBytestring, "raw"));
   const success = decipher.finish();
