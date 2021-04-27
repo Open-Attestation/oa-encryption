@@ -4,7 +4,7 @@ import {
   ENCRYPTION_PARAMETERS,
   IEncryptionResults,
   encodeDocument,
-  decodeDocument
+  decodeDocument,
 } from "./index";
 import sample from "../test/fixture/sample.json";
 
@@ -37,7 +37,7 @@ describe("storage/crypto", () => {
           iv: expect.stringMatching(base64Regex),
           tag: expect.stringMatching(base64Regex),
           key: expect.stringMatching(encryptionKeyRegex),
-          type: ENCRYPTION_PARAMETERS.version
+          type: ENCRYPTION_PARAMETERS.version,
         })
       );
     });
@@ -50,7 +50,7 @@ describe("storage/crypto", () => {
           iv: expect.stringMatching(base64Regex),
           tag: expect.stringMatching(base64Regex),
           key: expect.stringMatching(encryptionKeyRegex),
-          type: ENCRYPTION_PARAMETERS.version
+          type: ENCRYPTION_PARAMETERS.version,
         })
       );
       expect(encryptionResults.key).toStrictEqual(encryptionKey);

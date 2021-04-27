@@ -9,7 +9,7 @@ export const ENCRYPTION_PARAMETERS = {
   keyLength: 256, // Key length in bits
   ivLength: 96, // IV length in bits: NIST suggests 12 bytes
   tagLength: 128, // GCM authentication tag length in bits, see link above for explanation
-  version: "OPEN-ATTESTATION-TYPE-1" // Type 1 using the above params without compression
+  version: "OPEN-ATTESTATION-TYPE-1", // Type 1 using the above params without compression
 };
 
 /**
@@ -40,7 +40,7 @@ const makeCipher = (encryptionKey: string = generateEncryptionKey()) => {
 
   cipher.start({
     iv: forge.util.decode64(iv),
-    tagLength: ENCRYPTION_PARAMETERS.tagLength
+    tagLength: ENCRYPTION_PARAMETERS.tagLength,
   });
 
   return { cipher, encryptionKey, iv };
@@ -90,7 +90,7 @@ export const encryptString = (document: string, key?: string): IEncryptionResult
     iv,
     tag,
     key: encryptionKey,
-    type: ENCRYPTION_PARAMETERS.version
+    type: ENCRYPTION_PARAMETERS.version,
   };
 };
 
@@ -115,7 +115,7 @@ export const decryptString = ({ cipherText, tag, iv, key, type }: IEncryptionRes
   decipher.start({
     iv: ivBytestring,
     tagLength: ENCRYPTION_PARAMETERS.tagLength,
-    tag: forge.util.createBuffer(tagBytestring, "raw")
+    tag: forge.util.createBuffer(tagBytestring, "raw"),
   });
   decipher.update(forge.util.createBuffer(cipherTextBytestring, "raw"));
   const success = decipher.finish();
