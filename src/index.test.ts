@@ -4,8 +4,8 @@ import {
   ENCRYPTION_PARAMETERS,
   IEncryptionResults,
   encodeDocument,
-  decodeDocument
-} from ".";
+  decodeDocument,
+} from "./index";
 import sample from "../test/fixture/sample.json";
 
 const base64Regex = /^(?:[a-zA-Z0-9+/]{4})*(?:|(?:[a-zA-Z0-9+/]{3}=)|(?:[a-zA-Z0-9+/]{2}==)|(?:[a-zA-Z0-9+/]{1}===))$/;
@@ -37,7 +37,7 @@ describe("storage/crypto", () => {
           iv: expect.stringMatching(base64Regex),
           tag: expect.stringMatching(base64Regex),
           key: expect.stringMatching(encryptionKeyRegex),
-          type: ENCRYPTION_PARAMETERS.version
+          type: ENCRYPTION_PARAMETERS.version,
         })
       );
     });
@@ -50,15 +50,17 @@ describe("storage/crypto", () => {
           iv: expect.stringMatching(base64Regex),
           tag: expect.stringMatching(base64Regex),
           key: expect.stringMatching(encryptionKeyRegex),
-          type: ENCRYPTION_PARAMETERS.version
+          type: ENCRYPTION_PARAMETERS.version,
         })
       );
       expect(encryptionResults.key).toStrictEqual(encryptionKey);
     });
     test("should throw error if input is not a string", () => {
       encryptionResults = encryptString("hello world");
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore because we're explicitly testing failure mode
       expect(() => encryptString({})).toThrow("encryptString only accepts strings");
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore because we're explicitly testing failure mode
       expect(() => encryptString(2)).toThrow("encryptString only accepts strings");
     });
