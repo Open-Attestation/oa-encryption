@@ -1,4 +1,4 @@
-#Open Attestation (Encryption)
+# Open Attestation (Encryption)
 
 The [Open Attestation (Encryption)](https://github.com/Open-Attestation/oa-encryption) repository is the codebase for the npm module that allows you to encrypt documents in order to share and store them safely.
 
