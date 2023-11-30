@@ -119,8 +119,8 @@ The content of your document is retrieved.
 
 ### ENCRYPTION_PARAMETERS
 
-Default options from responses here\
-<https://crypto.stackexchange.com/questions/26783/ciphertext-and-tag-size-and-iv-transmission-with-aes-in-gcm-mode/26787>
+Default options from responses
+[here](https://crypto.stackexchange.com/questions/26783/ciphertext-and-tag-size-and-iv-transmission-with-aes-in-gcm-mode/26787)
 
 #### algorithm
 
