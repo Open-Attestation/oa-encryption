@@ -99,7 +99,7 @@ The content of your document is retrieved.
 
 #### Table of Contents
 
-*   [ENCRYPTION_PARAMETERS](#encryption_parameters)
+*   [ENCRYPTION\_PARAMETERS](#encryption_parameters)
     *   [algorithm](#algorithm)
     *   [keyLength](#keylength)
     *   [ivLength](#ivlength)
@@ -117,7 +117,7 @@ The content of your document is retrieved.
 *   [decryptString](#decryptstring)
     *   [Parameters](#parameters-4)
 
-### ENCRYPTION_PARAMETERS
+### ENCRYPTION\_PARAMETERS
 
 Default options from responses
 [here](https://crypto.stackexchange.com/questions/26783/ciphertext-and-tag-size-and-iv-transmission-with-aes-in-gcm-mode/26787)
@@ -144,13 +144,13 @@ Generates a random key represented as a hexadecimal string
 
 #### Parameters
 
-*   `document` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `document` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### decodeDocument
 
 #### Parameters
 
-*   `encoded` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `encoded` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### IEncryptionResults
 
@@ -161,7 +161,7 @@ Encrypts a given string with symmetric AES
 #### Parameters
 
 *   `document` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Input string to encrypt
-*   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
+*   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
 
 Returns **[IEncryptionResults](#iencryptionresults)** cipherText cipher text in base64
 
@@ -179,17 +179,17 @@ Decrypts a given ciphertext along with its associated variables
 
 #### Parameters
 
-*   `$0` **[IEncryptionResults](#iencryptionresults)** 
+*   `$0` **[IEncryptionResults](#iencryptionresults)**&#x20;
 
-    *   `$0.cipherText`  
-    *   `$0.tag`  
-    *   `$0.iv`  
-    *   `$0.key`  
-    *   `$0.type`  
+    *   `$0.cipherText` &#x20;
+    *   `$0.tag` &#x20;
+    *   `$0.iv` &#x20;
+    *   `$0.key` &#x20;
+    *   `$0.type` &#x20;
 *   `cipherText` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** cipher text base64 encoded
 *   `tag` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** aes authentication tag base64 encoded
 *   `iv` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** iv base64 encoded
 *   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** decryption key hexademical encoded
 *   `type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** encryption algorithm identifier
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
