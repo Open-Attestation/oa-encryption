@@ -1,7 +1,7 @@
 import forge from "node-forge";
 
 /**
- * Default options from responses 
+ * Default options from responses
  * {@link https://crypto.stackexchange.com/questions/26783/ciphertext-and-tag-size-and-iv-transmission-with-aes-in-gcm-mode/26787|here} 
  */
 export const ENCRYPTION_PARAMETERS = {
