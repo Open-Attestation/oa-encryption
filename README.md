@@ -124,11 +124,12 @@ You will be able to retrieve your document content.
     *   [Parameters](#parameters-1)
 *   [decodeDocument](#decodedocument)
     *   [Parameters](#parameters-2)
+*   [encryptString](#encryptstring)
+    *   [Parameters](#parameters-3)
+*   [decryptString](#decryptstring)
+    *   [Parameters](#parameters-4)
 *   [IEncryptionResults](#iencryptionresults)
-    *   [encryptString](#encryptstring)
-        *   [Parameters](#parameters-3)
-    *   [decryptString](#decryptstring)
-        *   [Parameters](#parameters-4)
+    *   [Properties](#properties)
 
 ### ENCRYPTION\_PARAMETERS
 
@@ -143,7 +144,7 @@ GCM and GMAC are modes of operation for an underlying approved symmetric key blo
 
 #### keyLength
 
-The key size should be at least 128 bits. See this [NIST publication](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf) to learn more.
+The key size should be 256 bits. See this [NIST publication](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf) to learn more.
 
 #### ivLength
 
@@ -157,7 +158,7 @@ Use a tag size of 64 bits at the very minimum, but it is preferable to use a tag
 
 #### version
 
-<!--Flag: Through a search in the NIST publication and the post on stackexchange, version was not found. We need to tell the users which version it is talking about.-->
+Use `"OPEN-ATTESTATION-TYPE-1"`.
 
 ### generateEncryptionKey
 
@@ -179,11 +180,10 @@ This request performs encoding on a document.
 #### Parameters
 
 This request supports the parameter below:
-<!--Flag: pls check the necessity column, if it is optional or required.-->
 
 | Parameter Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|-------------|
-|`document`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Optional | Provide a document to encode it |
+|`document`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Provide a document to encode it |
 
 ### decodeDocument
 
@@ -192,72 +192,85 @@ This request performs decoding on an encoded document.
 #### Parameters
 
 This request supports the parameter below:
-<!--Flag: pls check the necessity column, if it is optional or required.-->
 
 | Parameter Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|-------------|
-|`encoded`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Optional | Provide an encoded document to decode it |
+|`encoded`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Provide an encoded document to decode it |
 
-### IEncryptionResults
 
-<!--Flag: pls clarify if we can add some description to explain IEncryptionResults -->
-
-#### encryptString
+### encryptString
 
 This request encrypts a given string with symmetric AES.
 
-##### Parameters
+#### Parameters
 
 This request supports the parameters below:
-<!--Flag: pls check the necessity column, if it is optional or required.-->
 
 | Parameter Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
-|`document`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Optional | Input a string to encrypt it |
+|`document`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Input a string to encrypt it |
 | `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Optional | Input an encryption key |
 
-##### Results
+#### Results
 
-`IEncryptionResults` returns cipherText cipher text in base64:
+`encryptString` returns the `IEncryptionResults`, which contains:
 
-- Returns **any** `iv` in base64
+- **any** `cipherText` in base64
 
-- Returns **any** `tag`, which is the authenticated encryption tag in base64
+- **any** `iv` in base64
 
-- Returns **any** `key`, which is the encryption key in hexadecimal
+- **any** `tag`, which is the authenticated encryption tag in base64
 
-- Returns **any** `type`, which is the encryption algorithm identifier
+- **any** `key`, which is the encryption key in hexadecimal
 
-#### decryptString
+- **any** `type`, which is the encryption algorithm identifier
+
+### decryptString
 
 This request decrypts a given ciphertext and its associated variables.
 
-##### Parameters
+#### Parameters
 
 The list below shows the relationship between parameters:
 
 *   `$0` **[IEncryptionResults](#iencryptionresults)**
 
     *   `$0.cipherText` &#x20;
-    *   `$0.tag` &#x20;
     *   `$0.iv` &#x20;
+    *   `$0.tag` &#x20;  
     *   `$0.key` &#x20;
     *   `$0.type` &#x20;
 
 This request supports the parameters below:
-<!--Flag: pls check the necessity column, if it is optional or required.-->
 
 | Parameter Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
-|`cipherText`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Optional | Cipher text base64 encoded |
-| `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Optional | AES authentication tag base64 encoded |
-| `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Optional | IV base64 encoded |
-| `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Optional | Decryption key hexademical encoded |
+|`cipherText`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Cipher text base64 encoded |
+| `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
+| `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
+| `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
 | `type` | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Encryption algorithm identifier |
 
-##### Results
+#### Results
 
 This request returns the result in **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**.
+
+
+### IEncryptionResults
+
+`IEncryptionResults` is an interface. It is the result returned by `encryptString` and expected by `decryptString`.
+
+#### Properties
+
+This interface doesn't have any parameters, but has the following properties:
+
+| Property Name  | Data Type  | Necessity | Description |
+|-----------------|------------|-----------|------------|
+|`cipherText`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Cipher text base64 encoded |
+| `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
+| `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
+| `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
+| `type` | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Encryption algorithm identifier |
 
 
 ## Additional information
