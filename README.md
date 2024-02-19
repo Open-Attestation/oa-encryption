@@ -258,7 +258,7 @@ This request returns the result in **[string](https://developer.mozilla.org/docs
 
 ### IEncryptionResults
 
-`IEncryptionResults` is an interface. It is the result returned by `encryptString` and expected by `decryptString`.
+`IEncryptionResults` is an interface. It is the result returned by `encryptString` and the input expected by `decryptString`.
 
 #### Properties
 
