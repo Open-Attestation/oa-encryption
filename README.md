@@ -167,6 +167,10 @@ This request supports the parameter below:
 |-----------------|------------|-----------|-------------|
 |`keyLengthInBits`|**[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**| Optional  | Default `ENCRYPTION_PARAMETERS.keyLength` |
 
+#### Results
+
+Returns the generated key as a **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**.
+
 
 ### encodeDocument
 
@@ -180,6 +184,11 @@ This request supports the parameter below:
 |-----------------|------------|-----------|-------------|
 |`document`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Provide a document to encode it |
 
+#### Results
+
+Returns the encoded document as a **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**.
+
+
 ### decodeDocument
 
 This request performs decoding on an encoded document.
@@ -192,6 +201,9 @@ This request supports the parameter below:
 |-----------------|------------|-----------|-------------|
 |`encoded`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Provide an encoded document to decode it |
 
+#### Results
+
+Returns the decoded document as a **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**.
 
 ### encryptString
 
@@ -208,21 +220,24 @@ This request supports the parameters below:
 
 #### Results
 
-`encryptString` returns an `IEncryptionResults` object, which contains:
+Returns an [IEncryptionResults](#iencryptionresults) object which contains the encrypted string.
 
-- **any** `cipherText` in base64
-
-- **any** `iv` in base64
-
-- **any** `tag`, which is the authenticated encryption tag in base64
-
-- **any** `key`, which is the encryption key in hexadecimal
-
-- **any** `type`, which is the encryption algorithm identifier
 
 ### decryptString
 
-This request decrypts a given ciphertext and its associated variables. It expects an `IEncryptionResults` object as a parameter.
+This request decrypts a given ciphertext and its associated variables.
+
+#### Parameters
+
+This request supports the parameter below:
+
+| Property Name  | Data Type  | Necessity | Description |
+|-----------------|------------|-----------|------------|
+|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | `IEncryptionResults` object with the corresponding values |
+
+#### Results
+
+Returns the decrypted **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**.
 
 
 ### IEncryptionResults
@@ -235,7 +250,11 @@ This interface has the following properties:
 
 | Property Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
-|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | `IEncryptionResults` object with the corresponding values |
+|`cipherText`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Cipher text base64 encoded |
+| `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
+| `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
+| `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
+| `type` | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Encryption algorithm identifier |
 
 
 ## Additional information
