@@ -222,33 +222,7 @@ This request supports the parameters below:
 
 ### decryptString
 
-This request decrypts a given ciphertext and its associated variables.
-
-#### Parameters
-
-The list below shows the relationship between parameters:
-
-*   `$0` **[IEncryptionResults](#iencryptionresults)**
-
-    *   `$0.cipherText` &#x20;
-    *   `$0.iv` &#x20;
-    *   `$0.tag` &#x20;  
-    *   `$0.key` &#x20;
-    *   `$0.type` &#x20;
-
-This request supports the parameters below:
-
-| Parameter Name  | Data Type  | Necessity | Description |
-|-----------------|------------|-----------|------------|
-|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | IEncryptionResults object with the corresponding values |
-| `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
-| `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
-| `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
-| `type` | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Encryption algorithm identifier |
-
-#### Results
-
-This request returns the result in **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**.
+This request decrypts a given ciphertext and its associated variables. It expects an `IEncryptionResults` object as a parameter.
 
 
 ### IEncryptionResults
@@ -261,11 +235,7 @@ This interface has the following properties:
 
 | Property Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
-|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | IEncryptionResults object with the corresponding values |
-| `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
-| `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
-| `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
-| `type` | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Encryption algorithm identifier |
+|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | `IEncryptionResults` object with the corresponding values |
 
 
 ## Additional information
