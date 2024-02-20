@@ -137,7 +137,7 @@ To learn more about the default options from responses, see this [StackExchange 
 
 #### algorithm
 
-The default value of `algorithm` is `"AES-GCM" as const`. 
+The default value of `algorithm` is `"AES-GCM"`. 
 
 #### keyLength
 
@@ -208,7 +208,7 @@ This request supports the parameters below:
 
 #### Results
 
-`encryptString` returns the `IEncryptionResults`, which contains:
+`encryptString` returns an `IEncryptionResults` object, which contains:
 
 - **any** `cipherText` in base64
 
@@ -240,7 +240,7 @@ This request supports the parameters below:
 
 | Parameter Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
-|`cipherText`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Cipher text base64 encoded |
+|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | IEncryptionResults object with the corresponding values |
 | `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
 | `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
 | `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
@@ -261,7 +261,7 @@ This interface has the following properties:
 
 | Property Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
-|`cipherText`|**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | Cipher text base64 encoded |
+|`object`|**[IEncryptionResults](#iencryptionresults)**| Required | IEncryptionResults object with the corresponding values |
 | `iv` |**[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**| Required | IV base64 encoded |
 | `tag`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | AES authentication tag base64 encoded |
 | `key`  | **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** | Required | Decryption key hexademical encoded |
