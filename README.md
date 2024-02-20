@@ -141,15 +141,15 @@ The default value of `algorithm` is `"AES-GCM" as const`.
 
 #### keyLength
 
-The default value of `keyLength` is 256 bits.
+The default value of `keyLength` is 256 bits, based on the [NIST publication](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf).
 
 #### ivLength
 
-The default value of `ivLength` is 96 bytes.
+The default value of `ivLength` is 96 bits, based on the [NIST publication](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf).
 
 #### tagLength
 
-The default value of `tagLength` is 128 bits.
+The default value of `tagLength` is 128 bits, based on the [NIST publication](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf).
 
 #### version
 
@@ -257,7 +257,7 @@ This request returns the result in **[string](https://developer.mozilla.org/docs
 
 #### Properties
 
-This interface doesn't have any parameters, but has the following properties:
+This interface has the following properties:
 
 | Property Name  | Data Type  | Necessity | Description |
 |-----------------|------------|-----------|------------|
