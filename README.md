@@ -137,28 +137,23 @@ To learn more about the default options from responses, see this [StackExchange 
 
 #### algorithm
 
-The algorithm is Galois/Counter Mode (GCM). It aims for authenticated encryption with associated data; and its specialization GMAC, for generating a
-message authentication code (MAC) on data that is not encrypted.
-
-GCM and GMAC are modes of operation for an underlying approved symmetric key block cipher. 
+The default value of `algorithm` is `"AES-GCM" as const`. 
 
 #### keyLength
 
-The key size should be 256 bits. See this [NIST publication](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf) to learn more.
+The default value of `keyLength` is 256 bits.
 
 #### ivLength
 
-In Galois/Counter Mode (GCM), a 12 byte IV is strongly suggested as other IV lengths will require additional calculations. 
-
-In principle, any IV size can be used as long as the IV doesn't repeat. However, [NIST](http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf) suggests only an IV size of 12 bytes needs to be supported in the implementations.
+The default value of `ivLength` is 96 bytes.
 
 #### tagLength
 
-Use a tag size of 64 bits at the very minimum, but it is preferable to use a tag size of the full 128 bits.
+The default value of `tagLength` is 128 bits.
 
 #### version
 
-Use `"OPEN-ATTESTATION-TYPE-1"`.
+The default value of `version` is `"OPEN-ATTESTATION-TYPE-1"`.
 
 ### generateEncryptionKey
 
